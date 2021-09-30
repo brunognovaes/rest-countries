@@ -1,0 +1,8 @@
+:root {
+  --clr-bg-light: hsl(0, 0%, 98%);
+  --clr-bg-dark: hsl(207, 26%, 17%);
+  --clr-neutral-100: hsl(0, 0%, 100%);
+  --clr-neutral-300: hsl(0, 0%, 52%);
+  --clr-neutral-500: hsl(200, 15%, 8%);
+  --clr-neutral-600: hsl(209, 23%, 22%);
+}
