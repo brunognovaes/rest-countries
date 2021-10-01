@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { getAll } from '../../services/api';
+import Search from '../../components/Search';
+import Filter from '../../components/Filter';
 
-import './style.css';
-
-function Home() {
+function Home({ theme }) {
   const [countries, setCountries] = useState([]);
-
+  const [input, setInput] = useState('');
   useEffect(() => {
     const getCountries = async () => {
       const data = await getAll();
@@ -16,7 +16,8 @@ function Home() {
 
   return (
     <div>
-      <p>Home</p>
+      <Search input={ input } setTheme={ setInput } theme={ theme } />
+      <Filter />
     </div>
   )
 }

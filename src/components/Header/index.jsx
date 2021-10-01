@@ -2,18 +2,27 @@ import React, { useState } from 'react'
 import { ReactComponent as OutlinedMoon } from '../../design/icons/moonoutlined.svg';
 import { ReactComponent as FilledMoon } from '../../design/icons/moonfilled.svg';
 
-import style from './style.module.css';
+import { Container, ThemeContainer, Icon } from './style';
 
-function Header() {
-  const [isDark, setIsDark] = useState(false);
+function Header({theme, setTheme}) {
+  const handleTheme = (e) => {
+    e.preventDefault();
+    if (theme === 'light') {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  }
   return (
-    <header className={`${style.container}`}>
+    <Container>
       <p>Where in the world?</p>
-      <div className={`${style.modeContainer}`}>
-        { isDark ? <FilledMoon /> : <OutlinedMoon /> }
-        <p>Dark Mode</p>
-      </div>
-    </header>
+        <ThemeContainer htmlFor="icon">
+          <Icon id="icon" onClick={ (e) => handleTheme(e) } type="button">
+            { theme === 'dark' ? <FilledMoon /> : <OutlinedMoon /> }
+          </Icon>
+          <p>Dark Mode</p>
+        </ThemeContainer>
+    </Container>
   )
 }
 
