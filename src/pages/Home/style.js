@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
-export const Button = styled.button`
-  border: none;
-  cursor: pointer;
-  background-color: ${(props) => props.theme.pageBackground};
+export const CardsContainer = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
 `;

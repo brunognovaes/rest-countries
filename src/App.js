@@ -21,9 +21,10 @@ function App() {
           <Route exact path="/">
             <Home theme={theme} />
           </Route>
-          <Route path="/details/:id">
-            <Details />
-          </Route>
+          <Route
+            path="/details/:id"
+            component={(props) => <Details {...props} />}
+          />
         </Switch>
       </Container>
     </ThemeProvider>

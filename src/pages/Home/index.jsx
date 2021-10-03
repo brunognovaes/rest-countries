@@ -1,24 +1,40 @@
 import React, { useEffect, useState } from 'react';
-import { getAll } from '../../services/api';
+import { getAll, getByRegion } from '../../services/api';
 import Search from '../../components/Search';
 import Filter from '../../components/Filter';
+import Card from '../../components/Card';
+
+import { CardsContainer } from './style';
 
 function Home({ theme }) {
   const [countries, setCountries] = useState([]);
   const [input, setInput] = useState('');
+  const [filter, setFilter] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     const getCountries = async () => {
-      const data = await getAll();
+      setIsLoading(true);
+      const data = filter !== '' ? await getByRegion(filter) : await getAll();
       setCountries(data);
+      setIsLoading(false);
     }
     getCountries();
-  }, [setCountries])
+  }, [setCountries, filter]);
 
+  const nameRegex = new RegExp(input, 'i');
   return (
-    <div>
-      <Search input={ input } setTheme={ setInput } theme={ theme } />
-      <Filter />
-    </div>
+    <>
+      <Search input={ input } setInput={ setInput } theme={ theme } />
+      <Filter filter={ filter } setFilter={ setFilter } />
+      <CardsContainer>
+        {
+          isLoading ? 'Loading...' : countries.map((country) => country.name.common.match(nameRegex)
+            && <Card code={country.ccn3} flag={country.flags.svg} name={country.name.common} population={country.population} region={country.region} capital={country.capital} />
+          )
+        }
+      </CardsContainer>
+    </>
   )
 }
 
